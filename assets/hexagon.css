@@ -1,0 +1,60 @@
+.hexagonal-grid {
+    position: relative;
+    width: 300px;
+    height: 300px;
+}
+
+.hexagon {
+    position: absolute;
+    width: 60px;
+    height: 50px;
+    background-color: #64C7CC;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    transform: translate(-50%, -50%);
+}
+
+.hexagon:before,
+.hexagon:after {
+    content: "";
+    position: absolute;
+    width: 0;
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.hexagon:before {
+    bottom: 100%;
+    border-bottom: 17px solid #64C7CC;
+}
+
+.hexagon:after {
+    top: 100%;
+    width: 0;
+    border-top: 17px solid #64C7CC;
+}
+
+.hexagon.selected {
+    background-color: #FF6B6B;
+    transform: translate(-50%, -50%) scale(1.1);
+    z-index: 1;
+}
+
+.hexagon.selected:before {
+    border-bottom-color: #FF6B6B;
+}
+
+.hexagon.selected:after {
+    border-top-color: #FF6B6B;
+}
+
+.hexagon-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+}

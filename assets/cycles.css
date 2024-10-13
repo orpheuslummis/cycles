@@ -1,0 +1,169 @@
+:root {
+  --phi: 1.61803398875;
+  --inv-phi: 0.61803398875;
+  --e: 2.71828;
+  --pi: 3.14159;
+}
+
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+}
+
+.cycles-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.full-screen-numbers {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-auto-rows: 1fr;
+  gap: 1px;
+  height: 100vh;
+  width: 100vw;
+  padding: 10px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5em;
+  /* background-color: #000000; */
+  border-radius: 1px;
+}
+
+.full-screen-chars {
+  display: grid;
+  grid-template-columns: repeat(21, 1fr);
+  gap: 0;
+  height: 100vh;
+  width: 100vw;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #000;
+  overflow: hidden;
+}
+
+.char {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: calc(1.6em * var(--inv-phi));
+  transition: all 0.1s ease;
+}
+
+.char:hover {
+  transform: scale(var(--phi));
+  z-index: 1;
+}
+
+/* Dynamic color scheme based on HSL */
+.char {
+  color: hsl(calc(360deg * var(--inv-phi) * var(--char-index)), 70%, 50%);
+}
+
+/* Fibonacci-based color scheme */
+.char:nth-child(1n) {
+  color: #FFD700;
+}
+
+/* Gold */
+.char:nth-child(2n) {
+  color: #E6D690;
+}
+
+.char:nth-child(3n) {
+  color: #CDD5E0;
+}
+
+.char:nth-child(5n) {
+  color: #B4E1FF;
+}
+
+.char:nth-child(8n) {
+  color: #9BB7D4;
+}
+
+.char:nth-child(13n) {
+  color: #826C7F;
+}
+
+.char:nth-child(21n) {
+  color: #694364;
+}
+
+/* Mathematical patterns */
+.char:nth-child(5n) {
+  transform: rotate(calc(360deg / var(--e)));
+}
+
+.char:nth-child(7n) {
+  transform: skew(calc(45deg / var(--pi)));
+}
+
+.char:nth-child(11n) {
+  transform: scale(calc(var(--inv-phi) * var(--inv-phi)));
+}
+
+.char:nth-child(13n) {
+  opacity: calc(var(--inv-phi) * var(--inv-phi));
+}
+
+/* Prime number based effects */
+.char:nth-child(2n+1) {
+  font-weight: bold;
+}
+
+.char:nth-child(3n+2) {
+  font-style: italic;
+}
+
+.char:nth-child(5n+3) {
+  letter-spacing: calc(-0.05em * var(--inv-phi));
+}
+
+/* Void and special characters */
+.char[data-energy="0"] {
+  color: rgba(0, 0, 0, 0.2);
+  text-shadow: 0 0 2px rgba(255, 255, 255, 0.1);
+}
+
+.char[data-energy="1"] {
+  color: #FFD700 !important;
+  text-shadow: 0 0 5px #FFD700;
+}
+
+/* Subtle animation based on golden ratio */
+@keyframes golden-shift {
+
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(calc(2px * var(--inv-phi)), calc(-2px * var(--inv-phi)));
+  }
+}
+
+.char {
+  animation: golden-shift calc(5s * var(--phi)) infinite;
+  animation-delay: calc(var(--char-index) * 0.1s);
+}
